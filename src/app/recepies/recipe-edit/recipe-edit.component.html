@@ -1,0 +1,67 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="recipeForm">
+  <div class="row">
+    <div class="col-xs-12">
+      <button type="submit" class="btn btn-danger" [disabled]="!recipeForm.valid">Save</button>
+      <button type="button" class="btn btn-primary" (click)="onCancel()">Cancel</button>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-xs-12">.
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" name="name" formControlName="name">
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="url">Image URL:</label>
+        <input type="text" class="form-control" id="url" name="url" formControlName="imagePath" #imagePath>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+
+    <div class="col-xs-12">
+      <img [src]=imagePath.value alt="" class="img-responsive">
+    </div>
+
+
+  </div>
+  <div class="row">
+
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="url">Description</label>
+        <textarea type="text" class="form-control" id="description" name="description" rows="4" formControlName="description"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12" formArrayName="ingredients">
+      <div class="row" *ngFor="let ingre of formData.controls; let i=index" [formGroupName]="i" style="margin-top: 10px">
+        <div class="col-xs-8">
+          <input type="text" class="form-control" id="iName" name="iName" formControlName="name">
+        </div>
+        <div class="col-xs-2">
+          <input type="number" class="form-control" id="amount" name="amount" formControlName="amount">
+        </div>
+        <div class="col-xs-2">
+          <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <hr>
+          <button type="button" class="btn btn-primary" (click)="onAddIngre()">Add Ingredient</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
